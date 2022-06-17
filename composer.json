@@ -1,0 +1,42 @@
+{
+    "name": "nickbeen/php-cli-progress-bar",
+    "description": "For creating minimal progress bars in PHP CLI scripts",
+    "type": "library",
+    "keywords": [
+        "php",
+        "cli",
+        "progress bar"
+    ],
+    "homepage": "https://github.com/nickbeen/php-cli-progress-bar",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nick Been",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "NickBeen\\ProgressBar\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NickBeen\\ProgressBar\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
