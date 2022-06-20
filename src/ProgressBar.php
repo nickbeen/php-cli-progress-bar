@@ -35,8 +35,7 @@ final class ProgressBar
     public function __construct(
         private int $progress = 0,
         private int $maxProgress = 100,
-    )
-    {
+    ) {
         $this->startTime = time();
 
         /** setMaxProgress MUST go before setProgress */
@@ -64,7 +63,8 @@ final class ProgressBar
         $barCompleteWidth = ceil($this->barWidth * ($this->percentage / 100));
         $barIncompleteWidth = floor($this->barWidth - $barCompleteWidth);
 
-        echo sprintf('%s%s/%d [%s%s] %s%%',
+        echo sprintf(
+            '%s%s/%d [%s%s] %s%%',
             "\r",
             str_pad(string: $this->progress, length: strlen((string) $this->maxProgress), pad_type: STR_PAD_LEFT),
             $this->maxProgress,
@@ -75,8 +75,11 @@ final class ProgressBar
 
         /** Remove estimated time from display when done */
         if ($this->percentage < 100) {
-            echo sprintf(' (%s)', (
-                $this->estimatedTime < 86400 ? gmdate('H:i:s', $this->estimatedTime) : '>23:59:59')
+            echo sprintf(
+                ' (%s)',
+                (
+                $this->estimatedTime < 86400 ? gmdate('H:i:s', $this->estimatedTime) : '>23:59:59'
+            )
             );
         }
 
@@ -138,7 +141,7 @@ final class ProgressBar
      */
     public function iterate(iterable $iterable): iterable
     {
-        $this->setMaxProgress(is_countable($iterable) ? count($iterable): 0);
+        $this->setMaxProgress(is_countable($iterable) ? count($iterable) : 0);
 
         $this->start();
 
@@ -176,11 +179,13 @@ final class ProgressBar
      */
     private function setEstimatedTime(): ProgressBar
     {
-       $this->estimatedTime = round((
-           time() - $this->startTime) / $this->progress * ($this->maxProgress - $this->progress)
-       );
+        $this->estimatedTime = round(
+            (
+            time() - $this->startTime
+        ) / $this->progress * ($this->maxProgress - $this->progress)
+        );
 
-       return $this;
+        return $this;
     }
 
     /**
