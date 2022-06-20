@@ -3,7 +3,7 @@ name: Check and fix PHP Coding Standards
 on:
   pull_request:
     branches:
-      - ${{ github.event.release.target_commitish }}
+      - main
   
 jobs:
   php-cs-fixer:
