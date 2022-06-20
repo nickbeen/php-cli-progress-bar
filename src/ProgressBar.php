@@ -8,13 +8,13 @@ namespace NickBeen\ProgressBar;
 final class ProgressBar
 {
     /** Character to display current progress in progress bar */
-    private const BAR_CHARACTER = '#';
-
-    /** Character to display remaining progress in progress bar */
-    private const BAR_EMPTY_CHARACTER = '.';
+    private string $barCharacter = '#';
 
     /** Width of progress bar, in number of characters */
     private int $barWidth = 28;
+
+    /** Character to display remaining progress in progress bar */
+    private string $emptyBarCharacter = '.';
 
     /** Estimated time to finish in seconds */
     private int $estimatedTime = 0;
@@ -68,8 +68,8 @@ final class ProgressBar
             "\r",
             str_pad(string: $this->progress, length: strlen((string) $this->maxProgress), pad_type: STR_PAD_LEFT),
             $this->maxProgress,
-            str_repeat(self::BAR_CHARACTER, $barCompleteWidth),
-            str_repeat(self::BAR_EMPTY_CHARACTER, $barIncompleteWidth),
+            str_repeat($this->barCharacter, $barCompleteWidth),
+            str_repeat($this->emptyBarCharacter, $barIncompleteWidth),
             str_pad(string: $this->percentage, length: 3, pad_type: STR_PAD_LEFT)
         );
 
@@ -149,6 +149,26 @@ final class ProgressBar
         }
 
         $this->finish();
+    }
+
+    /**
+     * Change default character for completed progress
+     */
+    public function setBarCharacter(string $character): ProgressBar
+    {
+        $this->barCharacter = $character;
+
+        return $this;
+    }
+
+    /**
+     * Change default character for incomplete progress.
+     */
+    public function setEmptyBarCharacter(string $character): ProgressBar
+    {
+        $this->emptyBarCharacter = $character;
+
+        return $this;
     }
 
     /**
