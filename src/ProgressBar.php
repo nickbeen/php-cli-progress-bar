@@ -78,8 +78,8 @@ final class ProgressBar
             echo sprintf(
                 ' (%s)',
                 (
-                $this->estimatedTime < 86400 ? gmdate('H:i:s', $this->estimatedTime) : '>23:59:59'
-            )
+                    $this->estimatedTime < 86400 ? gmdate('H:i:s', $this->estimatedTime) : '>23:59:59'
+                )
             );
         }
 
@@ -197,8 +197,8 @@ final class ProgressBar
     {
         $this->estimatedTime = round(
             (
-            time() - $this->startTime
-        ) / $this->progress * ($this->maxProgress - $this->progress)
+                time() - $this->startTime
+            ) / $this->progress * ($this->maxProgress - $this->progress)
         );
 
         return $this;
