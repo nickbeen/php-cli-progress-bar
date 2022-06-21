@@ -90,6 +90,7 @@ final class ProgressBar
     {
         $this->setProgress($this->maxProgress)
             ->display()
+            ->showCursor()
             ->insertNewLine();
     }
 
@@ -123,6 +124,21 @@ final class ProgressBar
     public function getProgress(): int
     {
         return $this->progress;
+    }
+
+    /**
+     * Hide cursor after starting progress bar
+     */
+    private function hideCursor(): ProgressBar
+    {
+        /** Show cursor again in case of any exit code */
+        register_shutdown_function(function () {
+            $this->showCursor();
+        });
+
+        echo "\x1b[?25l";
+
+        return $this;
     }
 
     /**
@@ -219,13 +235,24 @@ final class ProgressBar
     }
 
     /**
+     * Show cursor again after finishing progress bar
+     */
+    private function showCursor(): ProgressBar
+    {
+        echo "\x1b[?25h\x1b[?0c";
+
+        return $this;
+    }
+
+    /**
      * Start displaying the progress bar.
      */
     public function start(): void
     {
         $this->startTime = time();
 
-        $this->display();
+        $this->hideCursor()
+            ->display();
     }
 
     /**
