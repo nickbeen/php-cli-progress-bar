@@ -13,11 +13,17 @@ final class ProgressBar
     /** Width of progress bar, in number of characters */
     private int $barWidth = 28;
 
+    /** Minimum time in seconds between consecutive refreshes of display */
+    private float $drawFrequency = 0.25;
+
     /** Character to display remaining progress in progress bar */
     private string $emptyBarCharacter = '.';
 
     /** Estimated time to finish in seconds */
     private int $estimatedTime = 0;
+
+    /** Timing of last display */
+    private float $lastDisplayTime = 0.0;
 
     /** Current progress in percentage */
     private int $percentage = 0;
@@ -256,6 +262,8 @@ final class ProgressBar
     {
         $this->startTime = time();
 
+        $this->lastDisplayTime = microtime(true);
+
         $this->hideCursor()
             ->display();
     }
@@ -266,7 +274,15 @@ final class ProgressBar
     public function tick(int $progress = 1): void
     {
         $this->setProgress($this->progress + $progress)
-            ->setEstimatedTime()
-            ->display();
+            ->setEstimatedTime();
+
+        /** Throttle refreshing of display for smoother animation  */
+        if ((microtime(true) - $this->lastDisplayTime) < $this->drawFrequency) {
+            return;
+        }
+
+        $this->lastDisplayTime = time();
+
+        $this->display();
     }
 }
