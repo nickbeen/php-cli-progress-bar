@@ -1,7 +1,7 @@
 # PHP CLI Progress Bar
 
 [![Latest version](https://img.shields.io/packagist/v/nickbeen/php-cli-progress-bar)](https://packagist.org/packages/nickbeen/php-cli-progress-bar)
-[![Build status](https://img.shields.io/github/workflow/status/nickbeen/php-cli-progress-bar/Run%20tests)](https://packagist.org/packages/nickbeen/php-cli-progress-bar)
+[![Build status](https://img.shields.io/github/actions/workflow/status/nickbeen/php-cli-progress-bar/run-tests.yml)](https://packagist.org/packages/nickbeen/php-cli-progress-bar)
 [![Total downloads](https://img.shields.io/packagist/dt/nickbeen/php-cli-progress-bar)](https://packagist.org/packages/nickbeen/php-cli-progress-bar)
 [![PHP Version](https://img.shields.io/packagist/php-v/nickbeen/php-cli-progress-bar)](https://packagist.org/packages/nickbeen/php-cli-progress-bar)
 [![License](https://img.shields.io/packagist/l/nickbeen/php-cli-progress-bar)](https://packagist.org/packages/nickbeen/php-cli-progress-bar)
