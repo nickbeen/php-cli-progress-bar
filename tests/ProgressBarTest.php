@@ -73,6 +73,28 @@ class ProgressBarTest extends TestCase
     /**
      * @test
      */
+    public function it_can_handle_floating_integers()
+    {
+        $progressBar = new ProgressBar(progress: 1.111, maxProgress: 9.999);
+        $this->assertEquals(1, $progressBar->getProgress());
+        $this->assertEquals(10, $progressBar->getMaxProgress());
+
+        $progressBar->setMaxProgress('99.999');
+        $this->assertEquals(100, $progressBar->getMaxProgress());
+
+        $progressBar->setProgress(9.999);
+        $this->assertEquals(10, $progressBar->getProgress());
+
+        $progressBar->start();
+        $progressBar->tick();
+        $this->assertEquals(11, $progressBar->getProgress());
+
+        $this->assertEquals(11, $progressBar->getPercentage());
+    }
+
+    /**
+     * @test
+     */
     public function it_can_iterate_through_array()
     {
         $iteration = [
