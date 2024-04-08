@@ -35,12 +35,12 @@ final class ProgressBar
      * Initialize and set progress and maxProgress when available.
      * Use separate setProgress() and setMaxProgress() methods when undetermined during initialization.
      *
-     * @param int $progress Current progress
-     * @param int $maxProgress Maximum progress
+     * @param int|float $progress Current progress
+     * @param int|float $maxProgress Maximum progress
      */
     public function __construct(
-        private int $progress = 0,
-        private int $maxProgress = 100,
+        private int|float $progress = 0,
+        private int|float $maxProgress = 100,
     ) {
         $this->startTime = time();
 
@@ -72,11 +72,11 @@ final class ProgressBar
         echo sprintf(
             '%s%s/%d [%s%s] %s%%',
             "\r",
-            str_pad(string: $this->progress, length: strlen((string) $this->maxProgress), pad_type: STR_PAD_LEFT),
-            $this->maxProgress,
+            str_pad(string: $this->getProgress(), length: strlen((string) $this->getMaxProgress()), pad_type: STR_PAD_LEFT),
+            $this->getMaxProgress(),
             str_repeat($this->barCharacter, $barCompleteWidth),
             str_repeat($this->emptyBarCharacter, $barIncompleteWidth),
-            str_pad(string: $this->percentage, length: 3, pad_type: STR_PAD_LEFT)
+            str_pad(string: $this->getPercentage(), length: 3, pad_type: STR_PAD_LEFT)
         );
 
         /** Remove estimated time from display when done */
@@ -116,7 +116,7 @@ final class ProgressBar
      */
     public function getMaxProgress(): int
     {
-        return $this->maxProgress;
+        return round($this->maxProgress);
     }
 
     /**
@@ -132,7 +132,7 @@ final class ProgressBar
      */
     public function getProgress(): int
     {
-        return $this->progress;
+        return round($this->progress);
     }
 
     /**
@@ -213,7 +213,7 @@ final class ProgressBar
     /**
      * Manually adjust the maxProgress parameter when undetermined or changed.
      */
-    public function setMaxProgress(int $maxProgress): ProgressBar
+    public function setMaxProgress(int|float $maxProgress): ProgressBar
     {
         $this->maxProgress = max(1, $maxProgress);
 
@@ -232,7 +232,7 @@ final class ProgressBar
     /**
      * Manually adjust the progress parameter.
      */
-    public function setProgress(int $progress): ProgressBar
+    public function setProgress(int|float $progress): ProgressBar
     {
         /** Increase maxProgress if progress unexpectedly gets higher than progress */
         if ($progress > $this->maxProgress) {
