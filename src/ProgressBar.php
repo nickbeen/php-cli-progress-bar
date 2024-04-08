@@ -225,7 +225,8 @@ final class ProgressBar
      */
     private function setPercentage(): void
     {
-        $this->percentage = number_format(($this->progress / $this->maxProgress) * 100, 2);
+        $percentage = ($this->progress / $this->maxProgress) * 100;
+        $this->percentage = number_format(round($percentage), 2);
     }
 
     /**
