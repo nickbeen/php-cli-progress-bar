@@ -161,7 +161,7 @@ final class ProgressBar
     /**
      * Iterate through countable variables such as an array.
      */
-    public function iterate(iterable $iterable): iterable
+    public function iterate(\Countable|iterable $iterable): iterable
     {
         $this->setMaxProgress(is_countable($iterable) ? count($iterable) : 0);
 
