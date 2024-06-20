@@ -82,10 +82,10 @@ final class ProgressBar
         /** Remove estimated time from display when done */
         if ($this->percentage < 100) {
             echo sprintf(
-                ' (%s)',
-                (
-                    $this->estimatedTime < 86400 ? gmdate('H:i:s', $this->estimatedTime) : '>23:59:59'
-                )
+                ' (%02d:%02d:%02d)',
+                floor($this->estimatedTime / 3600),
+                floor($this->estimatedTime / 60) % 60,
+                floor($this->estimatedTime) % 60
             );
         }
 
