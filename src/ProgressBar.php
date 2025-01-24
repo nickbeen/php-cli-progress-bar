@@ -286,6 +286,7 @@ final class ProgressBar
     {
         if ($progress == 0 && $this->maxProgressIsZero) {
             $this->finish();
+
             return;
         }
 
