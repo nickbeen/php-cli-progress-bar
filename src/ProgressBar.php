@@ -32,6 +32,12 @@ final class ProgressBar
     private int $startTime;
 
     /**
+     * Indicator whether maxProgress was truly set as zero.
+     * MaxProgress must always be at least one to be displayed.
+     */
+    private bool $maxProgressIsZero = false;
+
+    /**
      * Initialize and set progress and maxProgress when available.
      * Use separate setProgress() and setMaxProgress() methods when undetermined during initialization.
      *
@@ -204,7 +210,7 @@ final class ProgressBar
         $this->estimatedTime = round(
             (
                 time() - $this->startTime
-            ) / $this->progress * ($this->maxProgress - $this->progress)
+            ) / max(1, $this->progress) * ($this->maxProgress - $this->progress)
         );
 
         return $this;
@@ -215,6 +221,10 @@ final class ProgressBar
      */
     public function setMaxProgress(int|float $maxProgress): ProgressBar
     {
+        if ($maxProgress == 0) {
+            $this->maxProgressIsZero = true;
+        }
+
         $this->maxProgress = max(1, $maxProgress);
 
         return $this;
@@ -239,7 +249,7 @@ final class ProgressBar
             $this->setMaxProgress($progress);
         }
 
-        $this->progress = max(1, $progress);
+        $this->progress = max(0, $progress);
 
         $this->setPercentage();
 
@@ -274,6 +284,11 @@ final class ProgressBar
      */
     public function tick(int $progress = 1): void
     {
+        if ($progress == 0 && $this->maxProgressIsZero) {
+            $this->finish();
+            return;
+        }
+
         $this->setProgress($this->progress + $progress)
             ->setEstimatedTime();
 
