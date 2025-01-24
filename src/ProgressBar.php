@@ -239,7 +239,7 @@ final class ProgressBar
             $this->setMaxProgress($progress);
         }
 
-        $this->progress = max(0, $progress);
+        $this->progress = max(1, $progress);
 
         $this->setPercentage();
 
