@@ -83,7 +83,7 @@ $array = [
 
 $progressBar = new \NickBeen\ProgressBar\ProgressBar();
 
-foreach ($progressBar->iterate($array as $key => $value);) {
+foreach ($progressBar->iterate($array) as $key => $value) {
     echo "$key: $value" . PHP_EOL;
 }
 ```
