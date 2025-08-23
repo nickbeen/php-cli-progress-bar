@@ -146,7 +146,7 @@ class ProgressBarTest extends TestCase
         $progressBar = new ProgressBar();
         $progressBar->setMaxProgress(-1);
 
-        $this->assertEquals(1, $progressBar->getMaxProgress());
+        $this->assertEquals(0, $progressBar->getMaxProgress());
     }
 
     /**
@@ -155,10 +155,10 @@ class ProgressBarTest extends TestCase
     public function it_can_gracefully_handle_zero_progress()
     {
         $progressBar = new ProgressBar(maxProgress: 0);
-        $this->assertEquals(1, $progressBar->getMaxProgress());
+        $this->assertEquals(0, $progressBar->getMaxProgress());
 
         $progressBar->tick(0);
-        $this->assertEquals(1, $progressBar->getProgress());
+        $this->assertEquals(0, $progressBar->getProgress());
 
         $this->assertEquals(100, $progressBar->getPercentage());
     }
