@@ -225,7 +225,7 @@ final class ProgressBar
             $this->maxProgressIsZero = true;
         }
 
-        $this->maxProgress = max(1, $maxProgress);
+        $this->maxProgress = max(0, $maxProgress);
 
         return $this;
     }
@@ -235,6 +235,12 @@ final class ProgressBar
      */
     private function setPercentage(): void
     {
+        // Handle the "0 of 0" case as fully complete (100%) without division by zero
+        if ($this->maxProgress == 0) {
+            $this->percentage = 100;
+            return;
+        }
+
         $percentage = ($this->progress / $this->maxProgress) * 100;
         $this->percentage = number_format(round($percentage), 2);
     }
