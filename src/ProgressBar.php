@@ -7,7 +7,7 @@ namespace NickBeen\ProgressBar;
  */
 final class ProgressBar
 {
-    /** Character to display current progress in progress bar */
+    /** Character to display current progress in the progress bar */
     private string $barCharacter = '#';
 
     /** Width of progress bar, in number of characters */
@@ -16,19 +16,19 @@ final class ProgressBar
     /** Minimum time in seconds between consecutive refreshes of display */
     private float $drawFrequency = 0.25;
 
-    /** Character to display remaining progress in progress bar */
+    /** Character to display remaining progress in the progress bar */
     private string $emptyBarCharacter = '.';
 
     /** Estimated time to finish in seconds */
     private int $estimatedTime = 0;
 
-    /** Timing of last display */
+    /** Timing of the last display */
     private float $lastDisplayTime = 0.0;
 
     /** Current progress in percentage */
     private int $percentage = 0;
 
-    /** Time when progress bar starts displaying  */
+    /** Time when the progress bar starts displaying  */
     private int $startTime;
 
     /**
@@ -56,7 +56,7 @@ final class ProgressBar
     }
 
     /**
-     * Move cursor to line start and clear whole line.
+     * Move the cursor to line start and clear the whole line.
      */
     private function clearLine(): void
     {
@@ -85,7 +85,7 @@ final class ProgressBar
             str_pad(string: $this->getPercentage(), length: 3, pad_type: STR_PAD_LEFT)
         );
 
-        /** Remove estimated time from display when done */
+        /** Remove estimated time from the display when done */
         if ($this->percentage < 100) {
             echo sprintf(
                 ' (%02d:%02d:%02d)',
@@ -110,7 +110,7 @@ final class ProgressBar
     }
 
     /**
-     * Get estimated time for progress bar to complete.
+     * Get estimated time for the progress bar to complete.
      */
     public function getEstimatedTime(): string
     {
@@ -146,7 +146,7 @@ final class ProgressBar
      */
     private function hideCursor(): ProgressBar
     {
-        /** Show cursor again in case of any exit code */
+        /** Show the cursor again in case of any exit code */
         register_shutdown_function(function () {
             $this->showCursor();
         });
@@ -183,7 +183,7 @@ final class ProgressBar
     }
 
     /**
-     * Change default character for completed progress
+     * Change the default character for completed progress
      */
     public function setBarCharacter(string $character): ProgressBar
     {
@@ -193,7 +193,7 @@ final class ProgressBar
     }
 
     /**
-     * Change default character for incomplete progress.
+     * Change the default character for incomplete progress.
      */
     public function setEmptyBarCharacter(string $character): ProgressBar
     {
@@ -203,7 +203,7 @@ final class ProgressBar
     }
 
     /**
-     * Calculate estimated time for completion of progress bar.
+     * Calculate the estimated time for completion of the progress bar.
      */
     private function setEstimatedTime(): ProgressBar
     {
@@ -257,7 +257,7 @@ final class ProgressBar
     }
 
     /**
-     * Show cursor again after finishing progress bar
+     * Show the cursor again after finishing the progress bar
      */
     private function showCursor(): ProgressBar
     {

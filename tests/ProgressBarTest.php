@@ -16,7 +16,7 @@ class ProgressBarTest extends TestCase
     }
 
     /**
-     * Flush and return output buffer
+     * Flush and return the output buffer
      */
     public function tearDown(): void
     {
