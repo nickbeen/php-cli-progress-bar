@@ -238,6 +238,7 @@ final class ProgressBar
         // Handle the "0 of 0" case as fully complete (100%) without division by zero
         if ($this->maxProgress == 0) {
             $this->percentage = 100;
+
             return;
         }
 
